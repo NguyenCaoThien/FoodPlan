@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View, Text, StyleSheet, Button, TextInput, FlatList, Image, Keyboard,TouchableWithoutFeedback} from 'react-native';
+import {View, Text, StyleSheet, Button, TextInput, FlatList, Image, Keyboard,TouchableWithoutFeedback,TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import flatListData from '../data/data';
 import { Actions } from 'react-native-router-flux';
@@ -54,18 +54,24 @@ export default class Search extends Component{
         const gotoSearhResult=()=>{
             Actions.SearchResult();
         }
+
+        const gotoFilter=()=>{
+            Actions.Filter();
+        }
         return(
               
             <TouchableWithoutFeedback onPress={dismissKeyboard}>
                 <View>
                     <View style={styles.container}>
-                        <Icon name="angle-left" color="#eee" size={30} onPress={gotoPrevious}></Icon>
+                        <TouchableOpacity onPress={gotoPrevious}>
+                            <Icon name="angle-left" color="#eee" size={30} ></Icon>
+                        </TouchableOpacity>
                         <View>
                             <TextInput style={styles.txtSearch} placeholder="Tim kiem" onSubmitEditing={gotoSearhResult}></TextInput>
                         </View>
-                        <View>
+                        <TouchableOpacity onPress={gotoFilter}>
                             <Icon name="sliders" color="#eee" size={30} />
-                        </View>                     
+                        </TouchableOpacity>                     
                     </View>  
                     <Text style={{flexDirection:"column", color:'black', marginTop: 10}}>Nhập tên món ăn hoặc loại nguyên liệu bạn có</Text>
                     <SearchListReminder></SearchListReminder>

@@ -14,6 +14,16 @@ var flatListData = [
         "key": "598a687678fee204ee51cd30",
         "imgUrl": require("../Images/bocuonnuong.jpg"),
         "foodDescription": "Bò cuộn nướng khó cưỡng"
+    },
+    {
+        "key": "598a687678fee204ee51cd31",
+        "imgUrl": require("../Images/chaca.jpg"),
+        "foodDescription": "Chả cá Lã vọng, đặc sản Hà nội"
+    },
+    {
+        "key": "598a687678fee204ee51cd32",
+        "imgUrl": require("../Images/sushi.jpg"),
+        "foodDescription": "Sushi Nhật Bản, ngon bất ngờ"
     }
    
 ];

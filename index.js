@@ -9,6 +9,7 @@ import Home from './src/components/Home';
 import FoodList from './src/components/FoodList';
 import Search  from './src/components/Search';
 import Routes from './src/components/Router';
+import Filter from './src/components/Filter'
 
 class reactApp extends Component {
    render() {
@@ -20,4 +21,4 @@ class reactApp extends Component {
 export default reactApp
 
 AppRegistry.registerComponent(appName, () => reactApp);
-//AppRegistry.registerComponent(appName, () => Search);
+//AppRegistry.registerComponent(appName, () => Filter);

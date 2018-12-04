@@ -5,7 +5,7 @@ import { Router, Scene } from 'react-native-router-flux';
 import Home  from './Home';
 import FoodList from './FoodList';
 import Search from './Search'
-
+import Filter from './Filter'
 
 
 const Routes = () => (
@@ -16,7 +16,8 @@ const Routes = () => (
           <Scene key = "PhoBien" component = {FoodList} title = "Phổ biến" />
           <Scene key = "TruyenThong" component = {FoodList} title = "Truyền thống" />
           <Scene key = "Search" component = {Search} title = "" hideNavBar={true} />
-          <Scene key = "SearchResult" component = {FoodList} title = "" hideNavBar={true} />
+          <Scene key = "SearchResult" component = {FoodList} title = "Danh sách món ăn"  />
+          <Scene key = "Filter" component = {Filter} title = "Lọc" />
        </Scene>
     </Router>
  )

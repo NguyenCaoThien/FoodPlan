@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import {View, Text, StyleSheet, TextInput, Image, Button, Dimensions, TouchableOpacity, Keyboard,TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard';
-import {XuHuongScreen} from '../../screenName';
 import { Actions } from 'react-native-router-flux';
 
 
@@ -23,18 +22,18 @@ export default  class MenuContent extends Component{
                 Actions.TruyenThong();
             }
 
-            // const gotoSearch=()=>{
-            //     Actions.Search();
-            // }
+            const gotoSearch=()=>{
+                Actions.Search();
+            }
         //const {navigate} = this.props.navigation;
         return(
             <TouchableWithoutFeedback>
                 <View style={styles.container}>
                     <View style={styles.viewSearch}>
-                        <TextInput style={styles.txtInput} placeholder="Tim kiem" ></TextInput>
-                        <Icon name="shopping-cart" color="aqua" size={30} />
-                        
-                        
+                        <TouchableOpacity onPress={gotoSearch}> 
+                            <Text style={styles.txtInput} >Tìm kiếm</Text>
+                        </TouchableOpacity>
+                        <Icon name="shopping-cart" color="aqua" size={30} />                
                     </View>
                     <View style={{flex:1, backgroundColor: '#FF8C00', flexDirection:'column', width:150, justifyContent:'center', alignItems: 'center', height:10, marginTop: 2}}>
                         <Text style={{color: 'white'}}>Hôm nay ăn gì</Text>
@@ -84,14 +83,16 @@ const styles = StyleSheet.create({
         marginTop:2
     },
     txtInput:{
-      
-        borderColor: 'grey',
+        color:'grey',
+        opacity:.54,
+        borderColor: 'black',
         borderWidth:1,
         height:30,
         paddingTop:2,
+        paddingLeft: 3,
         width: 200,
         margin: 20,
-       
+      
        
     },
 
