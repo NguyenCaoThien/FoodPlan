@@ -1,15 +1,95 @@
 import React,{Component} from 'react';
-import {View, Text, StyleSheet, TextInput, Image, Button, Dimensions, TouchableOpacity, Keyboard,TouchableWithoutFeedback} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Image, Button, Dimensions, TouchableOpacity,
+   Keyboard,TouchableWithoutFeedback, Animated,ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard';
 import { Actions } from 'react-native-router-flux';
+import { TabView, SceneMap } from 'react-native-tab-view';
+import FoodList from './FoodList';
 
 
-   
+
+const FirstRoute = () => (
+    <ScrollView>
+        <View style={{flex:1}}>
+            <FoodList></FoodList>
+        </View>
+    </ScrollView>
+
+);
+const SecondRoute = () => (
+  <ScrollView>
+      <View style={{flex:1}}>
+          <FoodList></FoodList>
+      </View>
+  </ScrollView>
+);
+
+const ThirdRoute = () => (
+  <ScrollView>
+      <View style={{flex:1}}>
+          <FoodList></FoodList>
+      </View>
+  </ScrollView>
+);
+ class TabViewDetail extends Component {
+  state = {
+    index: 0,
+    routes: [
+      { key: 'first', title: 'Xu hướng' },
+      { key: 'second', title: 'Truyền thống' },
+      {key:'third',title:'Phổ biến'}
+    ],
+  };
+
+  _handleIndexChange = index => this.setState({ index });
+
+  _renderTabBar = props => {
+    const inputRange = props.navigationState.routes.map((x, i) => i);
+
+    return (
+      <View style={styles.tabBar}>
+        {props.navigationState.routes.map((route, i) => {
+          const color = props.position.interpolate({
+            inputRange,
+            outputRange: inputRange.map(
+              inputIndex => (inputIndex === i ? '#D6356C' : '#222')
+            ),
+          });
+          return (
+            <TouchableOpacity key={i}
+              style={styles.tabItem}
+              onPress={() => this.setState({ index: i })}>
+              <Animated.Text style={{ color }}>{route.title}</Animated.Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  };
+
+  _renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+    third: ThirdRoute
+  });
+
+  render() {
+    return (
+      <TabView
+        navigationState={this.state}
+        renderScene={this._renderScene}
+        renderTabBar={this._renderTabBar}
+        onIndexChange={this._handleIndexChange}
+      />
+    );
+  }
+}
+
+
 
 export default  class MenuContent extends Component{
     render(){
-       
             const goToXuHuong = () => {
                Actions.XuHuong();
             }
@@ -25,50 +105,43 @@ export default  class MenuContent extends Component{
             const gotoSearch=()=>{
                 Actions.Search();
             }
-        //const {navigate} = this.props.navigation;
+
+            const gotoHomNayAnGi=()=>{
+              Actions.HomNayAnGi();
+            }
+
         return(
             <TouchableWithoutFeedback>
-                <View style={styles.container}>
-                    <View style={styles.viewSearch}>
-                        <TouchableOpacity onPress={gotoSearch}> 
-                            <Text style={styles.txtInput} >Tìm kiếm</Text>
-                        </TouchableOpacity>
-                        <Icon name="shopping-cart" color="aqua" size={30} />                
-                    </View>
-                    <View style={{flex:1, backgroundColor: '#FF8C00', flexDirection:'column', width:150, justifyContent:'center', alignItems: 'center', height:10, marginTop: 2}}>
-                        <Text style={{color: 'white'}}>Hôm nay ăn gì</Text>
-                    </View>
-                    <View style={{flex:1, flexDirection:'row', width:'100%', height: 50, marginTop: 10}}>
-                        <TouchableOpacity style={{flex: 1, borderColor:'white', borderWidth: 1, justifyContent:'center', alignItems:'center'}}
-                            onPress={goToXuHuong}
-                        >
-                            <Text>Xu hướng</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{flex: 1, borderColor:'white', borderWidth: 1, justifyContent:'center', alignItems:'center'}} 
-                            onPress={goToPhoBien}
-                        >
-                            <Text>Phổ biến</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{flex: 1, borderColor:'white', borderWidth: 1, justifyContent:'center', alignItems:'center'}}
-                            onPress={gotoTruyenThong}
-                        >
-                            <Text>Truyền Thống</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+              <View style={{flex:1}}>
+                  <View style={styles.container}>
+                      <View style={styles.viewSearch}>
+                          <TouchableOpacity onPress={gotoSearch}>
+                              <Text style={styles.txtInput} >Tìm kiếm</Text>
+                          </TouchableOpacity>
+                          <Icon name="shopping-cart" color="aqua" size={30} />
+                      </View>
+                      <TouchableOpacity style={{flex:1, backgroundColor: '#FF8C00', flexDirection:'column', width:150, justifyContent:'center',
+                        alignItems: 'center', height:5, marginTop: 2}} onPress={gotoHomNayAnGi}>
+                          <Text style={{color: 'white'}}>Hôm nay ăn gì</Text>
+                      </TouchableOpacity>
+
+                  </View>
+                  <View style={{flex:4,width:'100%', marginTop: 10}}>
+                      <TabViewDetail></TabViewDetail>
+                  </View>
+              </View>
             </TouchableWithoutFeedback>
         )
     }
 }
 
+
 const styles = StyleSheet.create({
     container:{
         flexDirection: 'column',
-        // flex:1,
-        //justifyContent:'center',
+        flex:1,
         height: '25%',
         alignItems:'center',
-       // backgroundColor: 'green',
         paddingTop: 2
     },
     txtBtn:{
@@ -92,11 +165,20 @@ const styles = StyleSheet.create({
         paddingLeft: 3,
         width: 200,
         margin: 20,
-      
-       
     },
 
     imgCart:{
         backgroundColor: 'aqua'
-    }
-})
+    },
+    tabBar: {
+      flexDirection: 'row',
+      paddingTop: 0,
+    },
+    tabItem: {
+      flex: 1,
+      alignItems: 'center',
+       padding: 3,
+      borderWidth:1,
+      borderColor:'grey'
+    },
+});

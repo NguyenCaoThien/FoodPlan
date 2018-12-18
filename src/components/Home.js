@@ -7,7 +7,6 @@ import MenuHeader from './MenuHeader';
 import MenuContent from './MenuContent';
 import FoodList from './FoodList';
 import MenuFooter from './MenuFooter';
-//import {XuHuongScreen} from '../../screenName';
 
 
 export default class Home extends Component{
@@ -16,7 +15,6 @@ export default class Home extends Component{
             <View style={styles.container}>
                 <MenuHeader></MenuHeader>
                 <MenuContent></MenuContent>
-                <FoodList></FoodList>
                 <MenuFooter></MenuFooter>
             </View>
         )

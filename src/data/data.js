@@ -24,8 +24,13 @@ var flatListData = [
         "key": "598a687678fee204ee51cd32",
         "imgUrl": require("../Images/sushi.jpg"),
         "foodDescription": "Sushi Nhật Bản, ngon bất ngờ"
-    }
-   
+    },
+    {
+        "key": "598a687678fee204ee51cd33",
+        "imgUrl": require("../Images/phobien.jpg"),
+        "foodDescription": "Món ăn phổ biến"
+    },
+
 ];
- 
+
 module.exports = flatListData;

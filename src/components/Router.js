@@ -15,6 +15,7 @@ const Routes = () => (
           <Scene key = "XuHuong" component = {FoodList} title = "Xu hướng" />
           <Scene key = "PhoBien" component = {FoodList} title = "Phổ biến" />
           <Scene key = "TruyenThong" component = {FoodList} title = "Truyền thống" />
+          <Scene key = "HomNayAnGi" component = {FoodList} title = "Hôm nay ăn gì" />
           <Scene key = "Search" component = {Search} title = "" hideNavBar={true} />
           <Scene key = "SearchResult" component = {FoodList} title = "Danh sách món ăn"  />
           <Scene key = "Filter" component = {Filter} title = "Lọc" />

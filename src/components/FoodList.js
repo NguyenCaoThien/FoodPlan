@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View, Text, StyleSheet, TextInput, Image, Button, Dimensions,FlatList} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Image, Button, Dimensions,FlatList, TouchableWithoutFeedback} from 'react-native';
 import flatListData from '../data/data';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -7,7 +7,7 @@ class FlatListItem extends Component{
     constructor(props)
     {
         super(props);
-        
+
     }
     render(){
         return(
@@ -31,11 +31,11 @@ class FlatListItem extends Component{
                             <Icon name="calendar" color="black" size={30}></Icon>
                         </View>
                     </View>
-                    
+
                 </View>
                 <View style={{backgroundColor:'white', height: 1}}></View>
             </View>
-           
+
         )
     }
 }
@@ -43,14 +43,19 @@ class FlatListItem extends Component{
 export default class FoodList extends Component{
     render(){
         return(
-            <FlatList data={flatListData} renderItem={({item,index})=>{
-                  console.log(`item =${JSON.stringify(item)}, index=${index}`);
-                return(
-                    <FlatListItem item={item} index={index} parentFlatList={this}></FlatListItem>
-                )
-            }} style={{}}>
+          <TouchableWithoutFeedback>
+              <View>
+                  <FlatList data={flatListData} renderItem={({item,index})=>{
+                        console.log(`item =${JSON.stringify(item)}, index=${index}`);
+                      return(
+                          <FlatListItem item={item} index={index} parentFlatList={this}></FlatListItem>
+                      )
+                  }} style={{}}>
 
-            </FlatList>
+                  </FlatList>
+              </View>
+          </TouchableWithoutFeedback>
+
         )
     }
 }
