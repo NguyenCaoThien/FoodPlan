@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View, Text, StyleSheet, TextInput, Image, Button, Dimensions,FlatList, TouchableWithoutFeedback} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Image, Button, Dimensions,FlatList, TouchableWithoutFeedback,ScrollView} from 'react-native';
 import flatListData from '../data/data';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -43,6 +43,7 @@ class FlatListItem extends Component{
 export default class FoodList extends Component{
     render(){
         return(
+        <ScrollView> 
           <TouchableWithoutFeedback>
               <View>
                   <FlatList data={flatListData} renderItem={({item,index})=>{
@@ -55,7 +56,7 @@ export default class FoodList extends Component{
                   </FlatList>
               </View>
           </TouchableWithoutFeedback>
-
+        </ScrollView>   
         )
     }
 }
